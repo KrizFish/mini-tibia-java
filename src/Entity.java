@@ -1,0 +1,29 @@
+import java.awt.*;
+
+public abstract class Entity {
+    protected int x, y;
+    protected int size;
+    
+    public Entity(int x, int y, int size) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+    }
+    
+    abstract void draw(Graphics2D g);
+    
+    // Detecção de colisão AABB (Axis-Aligned Bounding Box)
+    public boolean collidesWith(Entity other) {
+        return x < other.getX() + other.getSize() &&
+               x + size > other.getX() &&
+               y < other.getY() + other.getSize() &&
+               y + size > other.getY();
+    }
+    
+    public int getX() { return x; }
+    public int getY() { return y; }
+    public int getSize() { return size; }
+    
+    public void setX(int x) { this.x = x; }
+    public void setY(int y) { this.y = y; }
+}
